@@ -1,11 +1,11 @@
 # vue-easy-swiper
 
-PC端轮播图
+PC 端轮播图
 
 功能：
 
 - 循环滚动
-- 
+- 自定义指示器
 
 ## 安装
 
@@ -144,12 +144,12 @@ export default {
 
 ## Attributes
 
-| 参数         | 说明                                                         | 类型    | 可选值     | 默认值 |
-| ------------ | ------------------------------------------------------------ | ------- | ---------- | ------ |
-| images       | 要预览的图片地址<br>除了字符串数组还支持对象数组，但对象中要有一个src属性是图片地址，<br>例如：images = [{id: 1, src: "http://xxxx/xxx.jpg"}] | array   | --         | [ ]    |
-| interval     | 轮播图间隔时间                                               | number  | --         | 3000   |
-| animDuration | 轮播图动画时间                                               | number  | --         | 1000   |
-| stopAnim     | 鼠标悬停上去的时候停止动画                                   | boolean | true/false | false  |
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| --- | --- | --- | --- | --- |
+| images | 要预览的图片地址<br>除了字符串数组还支持对象数组，但对象中要有一个 src 属性是图片地址，<br>例如：images = [{id: 1, src: "http://xxxx/xxx.jpg"}] | array | -- | [ ] |
+| interval | 轮播图间隔时间 | number | -- | 3000 |
+| animDuration | 轮播图动画时间 | number | -- | 1000 |
+| stopAnim | 鼠标悬停上去的时候停止动画 | boolean | true/false | false |
 
 ## slot
 
@@ -163,4 +163,3 @@ export default {
 | ------ | ---------------------------------------------------- | -------- |
 | click  | 轮播图被点击，如果`images`中是对象，则回调参数为对象 | item     |
 | change | 图片切换时的回调                                     | index    |
-
