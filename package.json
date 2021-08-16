@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-swiper",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "vue swiper on PC",
   "main": "dist/vue-easy-swiper.umd.min.js",
   "private": false,
