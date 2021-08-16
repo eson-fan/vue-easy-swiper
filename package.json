@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-swiper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue swiper",
   "main": "dist/vue-easy-swiper.umd.min.js",
   "private": false,
@@ -25,6 +25,7 @@
     "dist/vue-easy-swiper.umd.min.js",
     "package.json",
     "CHANGELOG.md",
+    "screenshot",
     "README.md"
   ],
   "repository": {
