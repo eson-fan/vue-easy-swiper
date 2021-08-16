@@ -1,11 +1,35 @@
 {
   "name": "vue-easy-swiper",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "vue swiper",
+  "main": "dist/vue-easy-swiper.umd.min.js",
+  "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "release": "standard-version --release-as patch",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major",
+    "pb": "npm run release && npm run build && npm publish --registry=http://registry.npmjs.org",
+    "build": "vue-cli-service build --target lib --name vue-easy-swiper package/src/swiper.vue",
+    "dev": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
+  },
+  "keywords": [
+    "js",
+    "Vue",
+    "swiper",
+    "plugin"
+  ],
+  "author": "esonfan",
+  "license": "ISC",
+  "files": [
+    "dist/vue-easy-swiper.umd.min.js",
+    "package.json",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eson-fan/vue-easy-swiper"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -18,6 +42,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "standard-version": "^9.3.1",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
