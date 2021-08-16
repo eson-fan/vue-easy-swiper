@@ -7,7 +7,7 @@
       @mouseout="resumeAnim(false)"
       :style="{
         width: swiperImgContainerWidth,
-        transform: swiperImgContainerTransformX
+        transform: swiperImgContainerTransformX,
       }"
     >
       <div
@@ -18,21 +18,29 @@
         :style="{ width: swiperWidth + 'px' }"
         @click="itemClickHandle(item)"
       >
-        <img :src="typeof item == 'object' ? item.src : item" class="swiper-item-img" alt="" />
+        <img
+          :src="typeof item == 'object' ? item.src : item"
+          class="swiper-item-img"
+          alt=""
+        />
       </div>
     </div>
     <div class="swiper-indicator" v-if="imgLength > 1">
-      <div
-        v-for="index in imgLength"
-        :key="'indicator_' + index"
-        @click="swipeToIndex(index)"
-        class="swiper-indicator-item-layout"
-      >
+      <slot name="indicator">
         <div
-          class="swiper-indicator-item"
-          :class="{ 'swiper-indicator-item-active': index == curIndicatorIndex }"
-        ></div>
-      </div>
+          v-for="index in imgLength"
+          :key="'indicator_' + index"
+          @click="swipeToIndex(index)"
+          class="swiper-indicator-item-layout"
+        >
+          <div
+            class="swiper-indicator-item"
+            :class="{
+              'swiper-indicator-item-active': index == curIndicatorIndex,
+            }"
+          ></div>
+        </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -47,7 +55,7 @@ export default {
       swiperTimer: '',
       // swiperObserver: '',
       throttled: '',
-      isDestory: false
+      isDestory: false,
     }
   },
   props: {
@@ -56,7 +64,7 @@ export default {
       required: true,
       default: function() {
         return []
-      }
+      },
     },
     //轮播图停留时间
     interval: {
@@ -64,7 +72,7 @@ export default {
       default: 3000,
       validator: function(value) {
         return value >= 100
-      }
+      },
     },
     //轮播图滚动动画时间
     animDuration: {
@@ -72,13 +80,13 @@ export default {
       default: 1000,
       validator: function(value) {
         return value >= 100
-      }
+      },
     },
     //鼠标悬停时，是否停止动画
     stopAnim: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   watch: {
     images(value) {
@@ -87,7 +95,7 @@ export default {
       } else {
         this.pauseAnim(true)
       }
-    }
+    },
   },
   computed: {
     imgLength() {
@@ -107,7 +115,7 @@ export default {
         duration = (duration / 1000).toFixed(1) + 's'
       }
       return 'transform ' + duration
-    }
+    },
   },
   created() {
     this.isDestory = false
@@ -133,7 +141,8 @@ export default {
             if (this.curSwiperIndex == this.imgLength - 1) {
               setTimeout(() => {
                 if (this && !this.isDestory) {
-                  this.$refs['swiper-item-0'][0].style.transform = 'translateX(' + this.swiperImgContainerWidth + ')'
+                  this.$refs['swiper-item-0'][0].style.transform =
+                    'translateX(' + this.swiperImgContainerWidth + ')'
                 }
               }, this.animDuration + 50)
             } else if (this.curSwiperIndex == this.imgLength) {
@@ -154,7 +163,8 @@ export default {
               if (this.curSwiperIndex == this.imgLength - 1) {
                 setTimeout(() => {
                   if (this && !this.isDestory) {
-                    this.$refs['swiper-item-0'][0].style.transform = 'translateX(' + this.swiperImgContainerWidth + ')'
+                    this.$refs['swiper-item-0'][0].style.transform =
+                      'translateX(' + this.swiperImgContainerWidth + ')'
                   }
                 }, this.animDuration + 50)
               }
@@ -190,6 +200,7 @@ export default {
     },
     changeHandle() {
       this.curIndicatorIndex = (this.curSwiperIndex % this.imgLength) + 1
+      this.$emit('change', this.curIndicatorIndex)
     },
     pauseAnim(notFromMouse) {
       if (notFromMouse || this.stopAnim) {
@@ -250,7 +261,7 @@ export default {
     swipeToIndex(index) {
       this.pauseAnim(true)
       this.startAnim(0, index - 2)
-    }
+    },
   },
   beforeDestroy() {
     this.isDestory = true
@@ -263,7 +274,7 @@ export default {
     if (this.throttled) {
       this.throttled.cancel()
     }
-  }
+  },
 }
 </script>
 <style scoped>
@@ -290,7 +301,7 @@ export default {
   flex-direction: row;
   justify-content: center;
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   width: 100%;
 }
 .swiper-indicator > .swiper-indicator-item-layout {
@@ -306,7 +317,9 @@ export default {
   background: #ffffff;
   opacity: 0.69;
 }
-.swiper-indicator > .swiper-indicator-item-layout > .swiper-indicator-item-active {
+.swiper-indicator
+  > .swiper-indicator-item-layout
+  > .swiper-indicator-item-active {
   background: #e50113;
 }
 </style>
